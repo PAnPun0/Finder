@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
-import { AnimatePresence } from 'framer-motion'; // Важно для анимации удаления
+import { AnimatePresence } from 'framer-motion';
 import Header from '../components/Header';
 import ActionButtons from '../components/ActionButtons';
 import BottomNav from '../components/BottomNav';
 import SwipeCard from '../components/SwipeCard';
+import FilterModal from '../components/FilterModal';
 
-// Данные (заглушка)
+
+
 const MOCK_USERS = [
   {
     id: 1,
@@ -29,15 +31,15 @@ const MOCK_USERS = [
 
 export default function FinderPage() {
   const [users, setUsers] = useState(MOCK_USERS);
-  const [activeAction, setActiveAction] = useState(null); // 'left' или 'right'
+  const [activeAction, setActiveAction] = useState(null);
+  const [isFilterOpen, setIsFilterOpen] = useState(false);
 
-  // Функция удаления карточки
   const removeCard = (id, direction) => {
-    setActiveAction(direction); // Запускаем анимацию улета
+    setActiveAction(direction);
     setTimeout(() => {
       setUsers((prev) => prev.filter((user) => user.id !== id));
-      setActiveAction(null); // Сбрасываем действие
-    }, 200); // Ждем пока анимация начнется
+      setActiveAction(null);
+    }, 200);
   };
 
   const handleSwipe = (direction) => {
@@ -47,48 +49,66 @@ export default function FinderPage() {
   };
 
   return (
-    <div className="relative h-screen bg-white flex flex-col font-sans overflow-hidden">
+    <div className="relative h-screen bg-white font-sans overflow-hidden">
       
-      {/* Фон (Пятна) */}
-      <div className="absolute top-[-10%] right-[-20%] w-[500px] h-[500px] bg-fuchsia-300 rounded-full blur-[100px] opacity-60 pointer-events-none" />
-      <div className="absolute top-[20%] left-[-20%] w-[400px] h-[400px] bg-sky-200 rounded-full blur-[80px] opacity-70 pointer-events-none" />
-
-      <Header />
-
-      {/* ЗОНА КАРТОЧЕК */}
-      <div className="flex-1 relative w-full max-w-md mx-auto px-2 mt-4">
-        <AnimatePresence>
-          {users.map((user, index) => {
-            if (index === 0) {
-              return (
-                <SwipeCard 
-                  key={user.id} 
-                  user={user} 
-                  onSwipe={handleSwipe}
-                  activeAction={activeAction}
-                />
-              );
-            }
-            return null;
-          })}
-        </AnimatePresence>
-        
-        {/* Если карточки кончились */}
-        {users.length === 0 && (
-            <div className="absolute inset-0 flex items-center justify-center text-slate-500">
-                Больше никого нет :(
-            </div>
-        )}
+      {/* --- СЛОЙ 1: ФОН (z-index: 0) --- */}
+      {/* Мы поместили пятна в отдельный контейнер, который лежит "на дне" */}
+      <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
+          <div className="absolute top-[-10%] right-[-20%] w-[500px] h-[500px] bg-fuchsia-300 rounded-full blur-[100px] opacity-60" />
+          <div className="absolute top-[20%] left-[-20%] w-[400px] h-[400px] bg-sky-200 rounded-full blur-[80px] opacity-70" />
       </div>
 
-      {/* Кнопки действий: передаем им функции управления */}
-      {/* Важно: В ActionButtons нужно добавить onClick пропсы */}
-      <ActionButtons 
-        onDislike={() => handleSwipe('left')} 
-        onLike={() => handleSwipe('right')}
+      {/* --- СЛОЙ 2: КОНТЕНТ (z-index: 10) --- */}
+      {/* Весь интерфейс лежит в этом блоке, который явно выше фона */}
+      <div className="relative z-10 flex flex-col h-full">
+        
+        {/* Хедер */}
+        <Header onOpenFilters={() => {
+            console.log("Клик прошел!"); 
+            setIsFilterOpen(true);
+        }} />
+
+        {/* Зона карточек */}
+        <div className="flex-1 w-full max-w-md mx-auto relative flex items-center justify-center">
+          <AnimatePresence>
+            {users.map((user, index) => {
+              if (index === 0) {
+                return (
+                  <SwipeCard 
+                    key={user.id} 
+                    user={user} 
+                    onSwipe={handleSwipe}
+                    activeAction={activeAction}
+                  />
+                );
+              }
+              return null;
+            })}
+          </AnimatePresence>
+          
+          {users.length === 0 && (
+              <div className="absolute inset-0 flex items-center justify-center text-slate-500">
+                  Больше никого нет :(
+              </div>
+          )}
+        </div>
+
+        {/* Кнопки лайков */}
+        <ActionButtons 
+          onDislike={() => handleSwipe('left')} 
+          onLike={() => handleSwipe('right')}
+        />
+
+        {/* Нижнее меню */}
+        <BottomNav />
+      </div>
+
+      {/* Модальное окно (оно само по себе имеет высокий z-index) */}
+      <FilterModal 
+          isOpen={isFilterOpen} 
+          onClose={() => setIsFilterOpen(false)} 
       />
 
-      <BottomNav />
     </div>
   );
 }
