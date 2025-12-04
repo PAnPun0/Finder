@@ -1,0 +1,13 @@
+@import "tailwindcss";
+
+@font-face {
+  font-family: "vk-sans";
+  src: url("./assets/fonts/vk-sans.ttf") format("truetype");
+  font-weight: 500;
+  font-style: normal;
+}
+@theme {
+  --font-sans: "vk-sans", sans-serif;
+  --color-vk-black: #313131;
+  --color-vk-blue: #3F8AE0;
+}
