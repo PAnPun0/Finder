@@ -9,6 +9,8 @@ import WelcomePage from './pages/WelcomePage'
 import RegisterPage from './pages/RegisterPage'
 import ProfilePage from './pages/ProfilePage'
 import EditProfilePage from './pages/EditProfilePage' 
+import ChatsPage from './pages/ChatsPage'
+import ChatRoomPage from './pages/ChatRoomPage'
 
 function App() {
   return (
@@ -21,6 +23,8 @@ function App() {
         <Route path="/finder" element={<FinderPage />} />
         <Route path="/profile" element={<ProfilePage />} />
         <Route path="/profile/edit" element={<EditProfilePage />} />
+        <Route path='/chats' element={<ChatsPage />} />
+        <Route path='/chats/:id' element={<ChatRoomPage />} />
 
         <Route path="/search" element={<div className="p-10">Поиск</div>} />
         <Route path="/likes" element={<div className="p-10">Лайки</div>} />
