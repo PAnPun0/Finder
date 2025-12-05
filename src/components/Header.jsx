@@ -15,7 +15,6 @@ export default function Header({ onOpenFilters }) {
     <header className="relative z-50 px-6 pt-6 pb-2 flex justify-between items-center">
       
       <div className="flex items-center gap-2">
-         {/* Лого и текст */}
          <img src="src/assets/finderLogo.svg" alt="Logo" className="w-16 h-16" />
          <h1 className="text-3xl font-bold text-vk-black tracking-tight">Finder</h1>
       </div>

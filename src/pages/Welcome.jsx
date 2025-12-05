@@ -1,8 +1,7 @@
 export default function WelcomeScreen() {
   return (
     <div className="w-full h-screen flex flex-col justify-between px-6 py-10 bg-white">
-      
-      {/* Верхняя часть */}
+
       <div className="flex flex-col">
         <h1 className="text-3xl font-bold text-gray-900 leading-tight">
           Любовь находится <br /> здесь
@@ -12,7 +11,6 @@ export default function WelcomeScreen() {
         </p>
       </div>
 
-      {/* Соц-кнопки */}
       <div className="flex justify-center space-x-6 mt-6">
         <button className="w-12 h-12 rounded-full border border-gray-300 flex items-center justify-center">
           

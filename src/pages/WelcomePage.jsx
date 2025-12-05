@@ -1,6 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import logo from '../assets/finderLogo.svg'; // Убедись, что путь верный
+import logo from '../assets/finderLogo.svg';
 
 export default function WelcomePage() {
   const navigate = useNavigate();
@@ -8,14 +8,13 @@ export default function WelcomePage() {
   return (
     <div className="relative w-full h-screen bg-white overflow-hidden flex flex-col font-sans">
       
-      {/* 1. ФОНОВЫЙ КОЛЛАЖ */}
+
       <div className="absolute top-[-15%] left-[-25%] w-[150%] h-[80%] flex gap-4 rotate-[-15deg] opacity-90 pointer-events-none">
         
       </div>
 
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-white/70 to-white via-50%" />
 
-      {/* 2. КОНТЕНТ */}
       <div className="relative z-10 flex flex-col justify-end h-full px-6 pb-10">
         <img src={logo} alt="Logo" className="w-16 h-16 mb-6" />
 
@@ -25,16 +24,12 @@ export default function WelcomePage() {
         <p className="text-slate-500 mb-10 text-lg">
           Найди свою пару, общайся и <br /> встречайся.
         </p>
-
-        {/* Соцсети */}
         <div className="flex justify-center gap-6 mb-8">
-            {/* Можно оставить кнопки соцсетей как заглушки */}
            <button className="w-12 h-12 border rounded-full flex items-center justify-center">🍎</button>
            <button className="w-12 h-12 border rounded-full flex items-center justify-center text-purple-600 font-bold">@</button>
            <button className="w-12 h-12 border rounded-full flex items-center justify-center">G</button>
         </div>
 
-        {/* Кнопки навигации */}
         <div className="flex gap-4">
           <button 
             onClick={() => navigate('/login')}

@@ -58,11 +58,10 @@ export default function FinderPage() {
       </div>
 
      
-      <div className="relative z-10 flex flex-col h-full">
+      <div className="relative z-10 flex flex-col h-full pb-20">
         
         
         <Header onOpenFilters={() => {
-            console.log("Клик прошел!"); 
             setIsFilterOpen(true);
         }} />
 
@@ -85,7 +84,7 @@ export default function FinderPage() {
           
           {users.length === 0 && (
               <div className="absolute inset-0 flex items-center justify-center text-slate-500">
-                  Больше никого нет :(
+                  Больше никого нет
               </div>
           )}
         </div>

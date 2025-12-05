@@ -14,7 +14,6 @@ const MarqueeTags = ({ tags, direction = 'left', speed = 20 }) => {
           duration: speed,
         }}
       >
-        {/* Дублируем теги много раз, чтобы лента была бесконечной */}
         {[...tags, ...tags, ...tags, ...tags].map((tag, i) => (
           <span
             key={i}

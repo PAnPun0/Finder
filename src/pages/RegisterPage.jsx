@@ -7,7 +7,6 @@ export default function RegisterPage() {
 
   const handleRegister = (e) => {
     e.preventDefault();
-    // Логика регистрации...
     navigate('/finder');
   };
 

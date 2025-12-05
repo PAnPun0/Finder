@@ -4,7 +4,6 @@ import { Eye, EyeOff } from 'lucide-react';
 export default function AuthInput({ label, type = 'text', value, onChange, placeholder }) {
   const [showPassword, setShowPassword] = useState(false);
   
-  // Если тип 'password' и мы нажали "показать", меняем на 'text'
   const inputType = type === 'password' ? (showPassword ? 'text' : 'password') : type;
 
   return (
@@ -21,7 +20,6 @@ export default function AuthInput({ label, type = 'text', value, onChange, place
           className="w-full bg-transparent outline-none text-slate-900 font-medium placeholder:text-slate-300"
         />
         
-        {/* Кнопка глаза только для паролей */}
         {type === 'password' && (
           <button 
             type="button"

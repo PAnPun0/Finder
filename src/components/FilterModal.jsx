@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
 import { X, Search, SlidersHorizontal } from 'lucide-react';
 import Slider from 'rc-slider';
-import 'rc-slider/assets/index.css'; // Обязательно импортируем стили слайдера!
+import 'rc-slider/assets/index.css'; 
 
-// Компонент переключателя (Девушки | Парни | Все)
 const SegmentedControl = ({ options, active, onChange }) => {
   return (
     <div className="bg-slate-100 p-1 rounded-xl flex text-sm font-medium relative">
@@ -26,11 +25,11 @@ const SegmentedControl = ({ options, active, onChange }) => {
 };
 
 export default function FilterModal({ isOpen, onClose }) {
-  // Состояния фильтров
+
   const [interest, setInterest] = useState('girls');
   const [visibility, setVisibility] = useState('girls');
-  const [ageRange, setAgeRange] = useState([14, 20]); // Мой возраст
-  const [targetAge, setTargetAge] = useState([18, 22]); // Кого ищу
+  const [ageRange, setAgeRange] = useState([14, 20]); 
+  const [targetAge, setTargetAge] = useState([18, 22]);
   const [distance, setDistance] = useState(3);
 
   const genderOptions = [
