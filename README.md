@@ -21,7 +21,7 @@ ____
 2. Vite
 3. Tailwindcss
 ## <div align="center">Настройка рабочей среду</div>
-1) ### Необхожимо скачать  [Node.js](https://nodejs.org/en/download)
+1) ### Необходимо скачать  [Node.js](https://nodejs.org/en/download)
 2) ### Клонировать репозиторий
 ```
 git clone <https://github.com/PAnPun0/Finder>
