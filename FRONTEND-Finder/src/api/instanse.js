@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 // Адрес бэкенда (пока локальный, потом поменяете на боевой)
-const API_URL = 'http://localhost:8000/api'; 
+import API_URL from './url';
 
 const $api = axios.create({
   baseURL: API_URL,
