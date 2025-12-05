@@ -9,6 +9,7 @@ export default function ProfilePage() {
   return (
     <div className="min-h-screen bg-slate-50 pb-24 font-sans">
       <header className="px-6 pt-12 pb-4 flex justify-between items-center bg-white">
+        <img src="src/assets/finderLogo.svg" alt="Logo" className="w-16 h-16" />
         <h1 className="text-3xl font-bold text-slate-800">Finder</h1>
         <button onClick={() => navigate('/profile/edit')}>
             <UserPen className="w-6 h-6 text-slate-800" />
@@ -20,7 +21,7 @@ export default function ProfilePage() {
         <div className="relative mb-4">
             <div className="w-32 h-32 rounded-full p-1 bg-gradient-to-tr from-purple-400 to-blue-400">
                 <img 
-                    src="https://images.unsplash.com/photo-1599566150163-29194dcaad36?q=80&w=300" 
+                    src="/images/sulus.jpg"
                     alt="Avatar" 
                     className="w-full h-full rounded-full object-cover border-4 border-white"
                 />
