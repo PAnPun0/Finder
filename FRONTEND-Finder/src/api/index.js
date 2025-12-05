@@ -1,77 +1,45 @@
-import $api from './instanse';
+import $api from './instance';
+import { transformUser } from './mapper'; // Импортируем маппер
 
 export const api = {
-  // --- АВТОРИЗАЦИЯ ---
-  login: (email, password) => $api.post('/auth/login', { email, password }),
-  register: (email, password) => $api.post('/auth/register', { email, password }),
-  authVk: (payload) => $api.post('/auth/vk', { payload }), // Отправляем то, что получили от VK
+  // 1. ВХОД ЧЕРЕЗ VK
+  // router.POST("/login-vk")
+  // Отправляем payload, получаем токен и ID пользователя
+  authVk: (payload) => $api.post('/login-vk', { payload }),
 
-  // --- ПРОФИЛЬ ТЕКУЩЕГО ЮЗЕРА ---
-  getMe: () => $api.get('/users/me'), // Получить мою анкету
-  updateMe: (data) => $api.put('/users/me', data), // Обновить (о себе, интересы)
+  getUser: async (id) => {
+    const response = await $api.get(`/user/${id}`);
+    // Подменяем данные в ответе на "красивые"
+    return { ...response, data: transformUser(response.data) };
+  },
 
-  // --- ЛЕНТА (FINDER) ---
-  // params может быть: { lat: 55.7, lng: 37.6, radius: 10, gender: 'female' }
-  getFeed: (params) => $api.get('/users/feed', { params }),
+  // 2. Обновить профиль (с обратной трансформацией)
+  updateUser: (id, form) => {
+    // form - это { bio, education, tags: [], work: '' }
+    // Превращаем в Go-структуру
+    const payload = {
+       Bio: form.bio,
+       Education: form.education,
+       Job: form.work, // Важно!
+       // Если массив тегов есть, мапим его
+       Interests: form.tags ? form.tags.map(t => ({ Name: t })) : []
+    };
+    return $api.put(`/user/${id}`, payload);
+  },
 
-  // --- ДЕЙСТВИЯ ---
-  likeUser: (userId) => $api.post("/users/${userId}/like"),
-  dislikeUser: (userId) => $api.post("/users/${userId}/dislike"),
+  // 3. Лента (возвращает массив)
+  getMatches: async (userId) => {
+    const response = await $api.get(`/matches/${userId}`);
+    // Если пришел массив пользователей
+    if (Array.isArray(response.data)) {
+        return { ...response, data: response.data.map(transformUser) };
+    }
+    return response;
+  },
+
+  // ... остальные методы (лайки и т.д.)
+  addLike: (data) => $api.post('/like', {
+      FromUserID: data.from_user_id, // Бэкенд ждет FromUserID (CamelCase или snake_case, уточни)
+      ToUserID: data.to_user_id      // Точно по модели: ToUserID
+  }),
 };
-
-//я не умею делать апи запросы поэтому ии сдлала
-// 1. Auth (Авторизация)
-
-//     POST /api/auth/vk
-
-//         Принимает: { "payload": "..." } (строка от VK ID SDK)
-
-//         Возвращает: { "token": "jwt_token_here", "user": { ... } }
-
-//     POST /api/auth/login (для обычного входа)
-
-//     POST /api/auth/register
-
-// 2. User Profile (Мой профиль)
-
-//     GET /api/users/me
-
-//         Заголовок: Authorization: Bearer <token>
-
-//         Возвращает: Объект с моим именем, фото, bio, тегами.
-
-//     PUT /api/users/me
-
-//         Принимает: { "bio": "...", "tags": ["IT", "Music"], "photos": [...] }
-
-// 3. Feed (Лента знакомств)
-
-//     GET /api/users/feed
-
-//         Заголовок: Authorization: Bearer <token>
-
-//         Параметры (Query): ?limit=10&gender=female&min_age=18&max_age=25
-
-//         Возвращает: Массив пользователей (как у нас в MOCK_USERS):
-//     code JSON
-
-        
-//     [
-//       {
-//         "id": 105,
-//         "name": "Алина",
-//         "age": 21,
-//         "photo": "url...",
-//         "bio": "Текст...",
-//         "distance": 5,
-//         "tags": ["Music", "Art"]
-//       }
-//     ]
-
-      
-
-// 4. Actions (Свайпы)
-
-//     POST /api/users/:id/like — Лайк пользователя с ID :id
-
-//     POST /api/users/:id/dislike — Дизлайк
