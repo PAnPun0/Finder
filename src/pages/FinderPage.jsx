@@ -51,25 +51,22 @@ export default function FinderPage() {
   return (
     <div className="relative h-screen bg-white font-sans overflow-hidden">
       
-      {/* --- СЛОЙ 1: ФОН (z-index: 0) --- */}
-      {/* Мы поместили пятна в отдельный контейнер, который лежит "на дне" */}
+      
       <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
-          <div className="absolute top-[-10%] right-[-20%] w-[500px] h-[500px] bg-fuchsia-300 rounded-full blur-[100px] opacity-60" />
+          <div className="absolute top-[-10%] right-[-20%] w-[500px] h-[500px] bg-fuchsia-300 rounded-full blur-[100px] opacity-70" />
           <div className="absolute top-[20%] left-[-20%] w-[400px] h-[400px] bg-sky-200 rounded-full blur-[80px] opacity-70" />
       </div>
 
-      {/* --- СЛОЙ 2: КОНТЕНТ (z-index: 10) --- */}
-      {/* Весь интерфейс лежит в этом блоке, который явно выше фона */}
+     
       <div className="relative z-10 flex flex-col h-full">
         
-        {/* Хедер */}
+        
         <Header onOpenFilters={() => {
             console.log("Клик прошел!"); 
             setIsFilterOpen(true);
         }} />
 
-        {/* Зона карточек */}
-        <div className="flex-1 w-full max-w-md mx-auto relative flex items-center justify-center">
+        <div className="flex-1 w-full max-w-md mx-auto relative  items-center justify-center">
           <AnimatePresence>
             {users.map((user, index) => {
               if (index === 0) {
@@ -92,18 +89,16 @@ export default function FinderPage() {
               </div>
           )}
         </div>
-
-        {/* Кнопки лайков */}
         <ActionButtons 
           onDislike={() => handleSwipe('left')} 
           onLike={() => handleSwipe('right')}
         />
 
-        {/* Нижнее меню */}
+       
         <BottomNav />
       </div>
 
-      {/* Модальное окно (оно само по себе имеет высокий z-index) */}
+      
       <FilterModal 
           isOpen={isFilterOpen} 
           onClose={() => setIsFilterOpen(false)} 

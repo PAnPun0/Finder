@@ -12,7 +12,7 @@ export default function Header({ onOpenFilters }) {
     }
   };
   return (
-    <header className="relative z-50 px-6 pt-12 pb-2 flex justify-between items-center">
+    <header className="relative z-50 px-6 pt-6 pb-2 flex justify-between items-center">
       
       <div className="flex items-center gap-2">
          {/* Лого и текст */}
@@ -22,7 +22,7 @@ export default function Header({ onOpenFilters }) {
       
       <button 
         onClick={onOpenFilters}
-        className="p-2 rounded-full hover:bg-black/5 transition cursor-pointer border-2 border-red-500"
+        className="p-2 rounded-full hover:bg-black/5 transition cursor-pointer"
       >
         <SlidersHorizontal className="w-6 h-6 text-slate-800" />
       </button>

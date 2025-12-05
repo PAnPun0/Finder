@@ -57,9 +57,7 @@ export default function FilterModal({ isOpen, onClose }) {
         <div className="flex justify-between items-center mb-6">
             <div className="flex items-center gap-2">
                 {/* Логотип (можно картинкой, можно иконкой) */}
-                <div className="w-8 h-8 bg-gradient-to-tr from-purple-500 to-pink-500 rounded-lg flex items-center justify-center text-white">
-                   <Search size={18} strokeWidth={3} />
-                </div>
+                <img src="src/assets/finderLogo.svg" alt="Logo" className="w-8 h-8" />
                 <h2 className="text-2xl font-bold text-slate-800">Finder</h2>
             </div>
             
