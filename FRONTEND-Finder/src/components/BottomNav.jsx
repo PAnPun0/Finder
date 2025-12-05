@@ -1,6 +1,6 @@
 import React from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { Layers, Search, Heart, MessageCircle, User } from 'lucide-react';
+import { Layers, Dices, Heart, MessageCircle, User } from 'lucide-react';
 
 export default function BottomNav() {
   const navigate = useNavigate();
@@ -8,7 +8,7 @@ export default function BottomNav() {
 
   const navItems = [
     { id: 'finder',  path: '/finder',  label: 'Анкеты',  icon: Layers },
-    { id: 'search',  path: '/search',  label: 'Поиск',   icon: Search },
+    { id: 'random',  path: '/random',  label: 'Поиск',   icon: Dices },
     { id: 'likes',   path: '/likes',   label: 'Лайки',   icon: Heart },
     { id: 'chats',   path: '/chats',   label: 'Чаты',    icon: MessageCircle },
     { id: 'profile', path: '/profile', label: 'Профиль', icon: User },
@@ -25,7 +25,7 @@ export default function BottomNav() {
             key={item.id}
             onClick={() => navigate(item.path)}
             className={`flex-1 flex flex-col items-center gap-1 transition-colors duration-200 ${
-              isActive ? 'text-blue-500' : 'text-slate-400 hover:text-slate-600'
+              isActive ? 'text-vk-blue' : 'text-vk-black'
             }`}
           >
             <item.icon 
