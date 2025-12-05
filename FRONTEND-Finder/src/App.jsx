@@ -5,6 +5,8 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'
 
 import LoginPage from './pages/LoginPage'
 import FinderPage from './pages/FinderPage'
+import WelcomePage from './pages/WelcomePage'
+import RegisterPage from './pages/RegisterPage'
 import ProfilePage from './pages/ProfilePage'
 import EditProfilePage from './pages/EditProfilePage' 
 import ChatsPage from './pages/ChatsPage'
@@ -16,9 +18,9 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        
-        <Route path="/" element={<LoginPage />} />
-        
+        <Route path="/" element={<WelcomePage />} />
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/register" element={<RegisterPage />} />
         
         <Route path="/finder" element={<FinderPage />} />
         <Route path="/profile" element={<ProfilePage />} />

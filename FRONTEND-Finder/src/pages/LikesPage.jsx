@@ -1,27 +1,16 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { SlidersHorizontal } from 'lucide-react';
 import BottomNav from '../components/BottomNav';
-import { api } from '../api';
-
+const MOCK_USERS = Array(6).fill({
+  id: 1,
+  name: 'Sulus',
+  age: 18,
+  distance: 9,
+  photo: '/images/sulus.jpg', 
+});
 
 export default function LikesPage() {
-  const [activeTab, setActiveTab] = useState('likesMe'); // likesMe (Входящие) | iLike (Исходящие)
-  const [users, setUsers] = useState([]);
-  const myId = localStorage.getItem('userId');
-
-  useEffect(() => {
-    if (!myId) return;
-    
-    setUsers([]); // Очищаем перед загрузкой
-
-    if (activeTab === 'likesMe') {
-        // КТО лайкнул МЕНЯ (user_liked_by)
-        api.getIncomingLikes(myId).then(res => setUsers(res.data));
-    } else {
-        // КОГО лайкнул Я (user_likes)
-        api.getOutgoingLikes(myId).then(res => setUsers(res.data));
-    }
-  }, [activeTab, myId]);
+  const [activeTab, setActiveTab] = useState('likesMe');
 
   return (
     <div className="min-h-screen bg-white pb-24 font-sans">
@@ -46,7 +35,7 @@ export default function LikesPage() {
       </div>
 
       <div className="px-3 grid grid-cols-2 gap-3">
-        {users.map((user, index) => (
+        {MOCK_USERS.map((user, index) => (
            <LikeCard key={index} user={user} isBlurred={activeTab === 'likesMe'} />
         ))}
       </div>

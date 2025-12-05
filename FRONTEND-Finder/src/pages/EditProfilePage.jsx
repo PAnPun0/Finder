@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { 
   Check, ChevronDown, 
   Globe, Music, Gamepad2, Palette, Dumbbell, Plane, Camera, Coffee 
 } from 'lucide-react';
-import { api } from '../api';
 
+// 1. Список доступных интересов (Данные)
 const INTERESTS_OPTIONS = [
   { id: 'it', label: 'IT', icon: Globe },
   { id: 'music', label: 'Музыка', icon: Music },
@@ -19,48 +19,6 @@ const INTERESTS_OPTIONS = [
 
 export default function EditProfilePage() {
   const navigate = useNavigate();
-  const myId = localStorage.getItem('userId');
-
-  const [form, setForm] = useState({
-    bio: '',
-    education: '',
-    work: '',
-    tags: []
-  });
-
-  // 1. Загружаем текущие данные при открытии
-  useEffect(() => {
-    if (myId) {
-      api.getUser(myId).then((res) => {
-        const user = res.data;
-        // Заполняем форму нашими "чистыми" данными
-        setForm({
-            bio: user.bio || '',
-            education: user.education || '',
-            work: user.job || '', // В маппере мы сделали job
-            tags: user.tags || [] // Массив строк ["IT", "Music"]
-        });
-      });
-    }
-  }, [myId]);
-
-  // 2. Функция сохранения (PUT запрос)
-  const handleSave = async () => {
-    try {
-      await api.updateUser(myId, form); // Отправляем обновленный объект
-      navigate('/profile');
-    } catch (e) {
-      console.error("Ошибка обновления:", e);
-      alert("Не удалось сохранить");
-    }
-  };
-
-    // Хелпер для изменения полей
-  const handleChange = (field, value) => {
-    setForm(prev => ({ ...prev, [field]: value }));
-  };
-
-
 
   // 2. Состояния (State)
   // Для образования (храним выбранную строку)
@@ -84,6 +42,10 @@ export default function EditProfilePage() {
     }
   };
 
+  const handleSave = () => {
+    console.log("Сохраняем:", { education, selectedTags });
+    navigate('/profile');
+  };
 
   return (
     <div className="min-h-screen bg-white pb-10 font-sans">
@@ -104,12 +66,9 @@ export default function EditProfilePage() {
         {/* Блок: О себе */}
         <section>
             <h2 className="text-xl font-bold text-slate-900 mb-2">О себе</h2>
-            <textarea 
-                className="w-full bg-slate-100 rounded-2xl p-4 h-32 outline-none"
-                value={form.bio}
-                onChange={(e) => handleChange('bio', e.target.value)}
-            />
-
+            <p className="text-xs text-slate-500 mb-4 leading-relaxed">
+                Рассказ о себе увеличит рейтинг от 5% до 15%.
+            </p>
             <textarea 
                 className="w-full bg-slate-100 rounded-2xl p-4 text-slate-800 font-medium outline-none focus:ring-2 focus:ring-blue-500 h-32 resize-none"
                 placeholder="Расскажите о себе"
