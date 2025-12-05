@@ -1,16 +1,40 @@
-# React + Vite
+# <div align="center">Finder</div>
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+МПИТ СВФУ 2025 - команда "МИАМИ"
 
-Currently, two official plugins are available:
+| Роль       |       ФИ         | 
+| ------------- |:------------------:|
+| Менеджер     | Григорьев Максим |
+| Дизайнер     | Емельянов Тускул |    
+| Дизайнер     | Попов Иван |     
+| Разработчик  | Егоров Алексей |
+| Разработчик  | Дьячковский Артемий  |
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+____
+Эволюция сервиса «VK Знакомства». Новое название — новые возможности. Мы делаем знакомства внутри ВКонтакте более осмысленными, безопасными и персонализированными, добавляя мощные фильтры и социальные механики на основе данных пользователя.
 
-## React Compiler
+## <div align="center"> 📺Стек технологии 🛠️</div>
+## Frontend
+[![My Skills](https://skillicons.dev/icons?i=react,vite,tailwindccs)](https://skillicons.dev)
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+1. React
+2. Vite
+3. Tailwindcss
+## <div align="center">Настройка рабочей среду</div>
+1) ### Необходимо скачать  [Node.js](https://nodejs.org/en/download)
+2) ### Клонировать репозиторий
+```
+git clone <https://github.com/PAnPun0/Finder>
+```
+3) ### Перейти в папку проекта
+```
+cd finder //либо в вашу папку куда вы клонировали репозиторий
+```
+4) ### Установить зависимости
+```
+npm install
+```
+5) ### После установки запускаем проект
+```
+npm run dev
+```
