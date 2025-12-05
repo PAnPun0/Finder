@@ -1,33 +1,24 @@
 import React, { useState } from 'react';
 import { SlidersHorizontal } from 'lucide-react';
 import BottomNav from '../components/BottomNav';
-
-// Моковые данные (пока одинаковые, но в реальности будут разные)
 const MOCK_USERS = Array(6).fill({
   id: 1,
   name: 'Sulus',
   age: 18,
   distance: 9,
-  // Используем ту же фотку, что и в других местах
   photo: '/images/sulus.jpg', 
 });
 
 export default function LikesPage() {
-  // Состояние активной вкладки: 'likesMe' (Я нравлюсь) или 'iLike' (Мне нравятся)
   const [activeTab, setActiveTab] = useState('likesMe');
 
   return (
     <div className="min-h-screen bg-white pb-24 font-sans">
       
-      {/* 1. ШАПКА */}
       <header className="px-6 pt-12 pb-4 flex justify-between items-center bg-white sticky top-0 z-10">
         <h1 className="text-3xl font-bold text-slate-900">Лайки</h1>
-        <button className="p-2 rounded-full hover:bg-slate-50 transition">
-           <SlidersHorizontal className="w-6 h-6 text-slate-800" />
-        </button>
+        
       </header>
-
-      {/* 2. ВКЛАДКИ (TABS) */}
       <div className="px-4 mb-6">
         <div className="flex items-center justify-between gap-4">
             <TabButton 
@@ -43,7 +34,6 @@ export default function LikesPage() {
         </div>
       </div>
 
-      {/* 3. СЕТКА КАРТОЧЕК */}
       <div className="px-3 grid grid-cols-2 gap-3">
         {MOCK_USERS.map((user, index) => (
            <LikeCard key={index} user={user} isBlurred={activeTab === 'likesMe'} />

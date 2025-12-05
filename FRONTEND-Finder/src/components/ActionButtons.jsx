@@ -9,7 +9,7 @@ export default function ActionButtons({ onLike, onDislike }) {
             onClick={onDislike}
             className="flex-1 h-16 rounded-2xl bg-[#C86B98] shadow-lg shadow-pink-200/50 flex items-center justify-center text-white hover:opacity-90 transition active:scale-95"
         >
-          <X className="w-8 h-8" strokeWidth={3} />
+          <X className="w-8 h-8 " strokeWidth={3} />
         </button>
 
         

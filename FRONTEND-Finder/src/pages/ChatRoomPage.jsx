@@ -1,20 +1,16 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { ChevronLeft, Paperclip, Send } from 'lucide-react';
-import MessageBubble from '../components/MessageBubble'; // Импортируем наш компонент
+import { ChevronLeft, Paperclip, Send, User } from 'lucide-react';
+import MessageBubble from '../components/MessageBubble'; 
 
-// ТЕКУЩИЙ ЮЗЕР (обычно берется из профиля или токена)
+
 const CURRENT_USER_ID = 1; 
-
-// МОКОВЫЕ ДАННЫЕ (Пример того, что должен прислать Бэкенд на Go)
-// Go использует поля типа `created_at` (snake_case), но в JS удобнее camelCase.
-// Обычно Axios настраивают на авто-конвертацию, но здесь я использую JS-стиль.
 const INITIAL_MESSAGES = [
   { 
     id: 101, 
     chatId: 1, 
-    senderId: 2, // Jane (не я)
-    content: 'Привет! Как твои дела?', 
+    senderId: 2,
+    content: 'aooaoa', 
     type: 'text',
     status: 'read',
     createdAt: '2023-12-01T18:20:00.000Z' 
@@ -22,8 +18,8 @@ const INITIAL_MESSAGES = [
   { 
     id: 102, 
     chatId: 1, 
-    senderId: 1, // Я
-    content: 'Привет, все супер! Делаю фронтенд на React.', 
+    senderId: 1,
+    content: '676776676767', 
     type: 'text',
     status: 'read',
     createdAt: '2023-12-01T18:22:00.000Z' 
@@ -42,6 +38,17 @@ export default function ChatRoomPage() {
   const [messages, setMessages] = useState(INITIAL_MESSAGES);
   const [inputValue, setInputValue] = useState('');
   const messagesEndRef = useRef(null);
+  const isAnon = id === 'anon';
+  const chatPartner = isAnon ? {
+      name: 'Аноним',
+      status: 'В сети',
+      avatar: null // У анонима нет фото
+  } : {
+      name: 'Jane Jain',
+      status: 'Online',
+      avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330'
+  };
+
 
   // Скролл вниз
   const scrollToBottom = () => {
@@ -102,12 +109,19 @@ export default function ChatRoomPage() {
             <ChevronLeft className="w-6 h-6 text-blue-500" />
         </button>
         <div className="flex flex-col items-center">
-            <h2 className="font-bold text-lg text-slate-900">Jane Jain</h2>
+            <h2 className="font-bold text-lg text-slate-900">{chatPartner.name}</h2>
             <span className="text-xs text-green-500 font-medium">Online</span>
+            {!isAnon && <span className="text-xs text-green-500 font-medium">{chatPartner.status}</span>}
+
         </div>
-        <div className="w-10 h-10 rounded-full overflow-hidden">
-             <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330" className="w-full h-full object-cover" />
+        <div className="w-10 h-10 rounded-full overflow-hidden bg-slate-100 flex items-center justify-center">
+             {chatPartner.avatar ? (
+                 <img src={chatPartner.avatar} className="w-full h-full object-cover" />
+             ) : (
+                 <User size={24} className="text-slate-400" />
+             )}
         </div>
+
       </header>
 
       {/* СПИСОК СООБЩЕНИЙ */}

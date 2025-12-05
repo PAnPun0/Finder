@@ -42,6 +42,7 @@ export default function ChatsPage() {
       
       {/* Шапка */}
       <header className="px-6 pt-12 pb-4 flex justify-between items-center bg-white sticky top-0 z-10">
+        <img src="src/assets/finderLogo.svg" alt="Logo" className="w-16 h-16" />
         <h1 className="text-3xl font-bold text-slate-900">Finder</h1>
         <button className="p-2 rounded-full hover:bg-slate-50">
            <Search className="w-6 h-6 text-slate-800" />
