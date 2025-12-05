@@ -69,10 +69,10 @@ const LikeCard = ({ user, isBlurred }) => (
       <img 
         src={user.photo} 
         alt={user.name} 
-        className={`w-full h-full object-cover transition-all duration-500 ${
+        className={`w-full h-full object-cover transition-all duration-500 
             // Если вкладка "Я нравлюсь" - размываем фото (как на дизайне)
-            isBlurred ? 'blur-sm scale-110' : '' 
-        }`}
+           
+        `}
       />
 
       {/* Затемнение снизу для читаемости текста */}
