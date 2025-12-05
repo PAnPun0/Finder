@@ -1,6 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import logo from '../assets/finderLogo.svg';
+import VKLoginButton from '../components/VKlogbutton';
 
 export default function WelcomePage() {
   const navigate = useNavigate();
@@ -24,11 +25,7 @@ export default function WelcomePage() {
         <p className="text-slate-500 mb-10 text-lg">
           Найди свою пару, общайся и <br /> встречайся.
         </p>
-        <div className="flex justify-center gap-6 mb-8">
-           <button className="w-12 h-12 border rounded-full flex items-center justify-center">🍎</button>
-           <button className="w-12 h-12 border rounded-full flex items-center justify-center text-purple-600 font-bold">@</button>
-           <button className="w-12 h-12 border rounded-full flex items-center justify-center">G</button>
-        </div>
+        <VKLoginButton />
 
         <div className="flex gap-4">
           <button 
